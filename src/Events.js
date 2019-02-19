@@ -14,8 +14,9 @@ class Events extends React.Component {
   }
 
   async componentDidMount() {
+    const TOKEN = process.env.API_TOKEN;
     const url =
-      "https://www.eventbriteapi.com/v3/events/search/?q=techno&location.address=SanFrancisco=&token=P7LP3DVH7WLX2UKRBVSE";
+      "https://www.eventbriteapi.com/v3/events/search/?q=queer&location.address=SanFrancisco=&token=P7LP3DVH7WLX2UKRBVSE";
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ events: data.events });

@@ -3,14 +3,48 @@ import React from "react";
 class SeachQuery extends React.Component {
   constructor(props) {
     super(props);
-    this.setState = {
+    this.state = {
       location: ""
     };
+    // this.handleFormChange = this.handleFormChange(this);
   }
+
+  // getInitialState = () => {
+  //   return { location: "" };
+  // };
+
+  handleFormChange = event => {
+    event.preventDefault();
+    // console.log(event.target.value);
+    this.state = {
+      location: event.target.value
+    };
+  };
+
+  handleFormClick = event => {
+    event.preventDefault();
+    console.log("handleFormClick called ...");
+    console.log(this.state);
+  };
+
   render() {
     return (
       <div className="search">
-        <input type="=text" placeholder="Search..." className="border-1" />
+        <form onSubmit={this.handleFormSubmit}>
+          <input
+            type="=text"
+            value={this.value}
+            onChange={this.handleFormChange}
+            placeholder="Search..."
+            className="border-1"
+          />
+          <input
+            type="button"
+            className="border-1"
+            value="Search"
+            onClick={this.handleFormClick}
+          />
+        </form>
       </div>
     );
   }
