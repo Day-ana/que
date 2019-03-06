@@ -25,9 +25,24 @@ code {
 
 .item-header {
   grid-area: header;
+  border-radius: 10px 0 0;
+  height: 40px;
+  padding: 20px 0;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.item-header a {
+  text-decoration: none;
+  font-kerning: 2px;
+  font-weight: lighter;
+  font-size: 2em;
+}
+
+.item-search {
+  grid-area: search;
   border-radius: 10px 10px 0 0;
-  height: 50px;
-  padding: 100px 0;
+  padding: 80px 0;
 }
 .item-main {
   grid-area: main;
@@ -64,6 +79,7 @@ code {
   grid-template-rows: auto;
   grid-template-areas:
     "header header header header"
+    "search search search search"
     "menu main main main"
     "footer footer footer footer";
 }
@@ -88,14 +104,14 @@ code {
   background: #0000005c;
 }
 .search {
-  border: 1px solid #ff00bc45;
+  /* border: 1px solid #ff00bc45; */
+  margin: 20px;
 }
 
 .search input {
   width: 40%;
-  height: 80px;
   padding: 20px;
-
+  margin: 20px;
   background: 0;
   font-size: 2em;
   font-weight: 100px;

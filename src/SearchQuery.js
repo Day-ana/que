@@ -9,13 +9,10 @@ class SeachQuery extends React.Component {
     // this.handleFormChange = this.handleFormChange(this);
   }
 
-  // getInitialState = () => {
-  //   return { location: "" };
-  // };
-
   handleFormChange = event => {
     event.preventDefault();
-    // console.log(event.target.value);
+    console.log(event.target.value);
+    console.log("handleFormChange called ...");
     this.state = {
       location: event.target.value
     };
@@ -24,7 +21,9 @@ class SeachQuery extends React.Component {
   handleFormClick = event => {
     event.preventDefault();
     console.log("handleFormClick called ...");
-    console.log(this.state);
+    this.state = {
+      location: this.state.location
+    };
   };
 
   render() {
