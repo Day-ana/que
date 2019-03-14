@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "@reach/router";
 
 class EventsDescription extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { events, id } = this.props;
     let defaultImg = "https://picsum.photos/200/200/?random";
@@ -12,7 +9,7 @@ class EventsDescription extends React.Component {
     if (imgUrl !== null) {
       imgUrl = imgUrl.url;
     }
-    console.log(events);
+    // console.log(events);
 
     return (
       <Link to={`/details/${id}`} className="event-profile">

@@ -2,8 +2,8 @@ import React from "react";
 import EventsDescription from "./EventsDescription";
 import SearchQuery from "./SearchQuery";
 import { Link } from "@reach/router";
-const TOKEN = process.env.API_TOKEN;
-console.log(TOKEN);
+// const TOKEN = process.env.API_TOKEN;
+// console.log(TOKEN);
 
 class Events extends React.Component {
   constructor(props) {
@@ -15,20 +15,28 @@ class Events extends React.Component {
       location: "San Francisco"
     };
   }
-
   async componentDidMount() {
-    const url = `https://www.eventbriteapi.com/v3/events/search/?q=queer&location.address=${
-      this.state.location
-    }=&token=P7LP3DVH7WLX2UKRBVSE`;
+    let url;
+    if (this.state.location) {
+      url = `https://www.eventbriteapi.com/v3/events/search/?q=queer&location.address=${
+        this.state.location
+      }=&token=P7LP3DVH7WLX2UKRBVSE`;
+    } else {
+      url = `https://www.eventbriteapi.com/v3/events/search/?q=queer&token=P7LP3DVH7WLX2UKRBVSE`;
+    }
+
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ events: data.events });
   }
   render() {
+    console.log(this.state.location);
+
     return (
       <div className="container">
         <div className="item-header border-1">
-          <Link to="/">Que</Link>
+          <Link to="/">Queery... </Link>
+          <span>{this.state.location} </span>
         </div>
 
         <div className="item-menu border-1">
@@ -40,7 +48,7 @@ class Events extends React.Component {
           <p>About</p> */}
         </div>
         <div className="item-search  ">
-          <SearchQuery />
+          <SearchQuery props={this.props} />
         </div>
         <div className="item-main border-1">
           <div className="container-grid">
@@ -50,6 +58,7 @@ class Events extends React.Component {
                   key={event.id}
                   events={event}
                   id={event.id}
+                  props={this.props}
                   className="container-grid"
                 />
               </div>
