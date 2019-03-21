@@ -9,7 +9,6 @@ class EventsDescription extends React.Component {
     if (imgUrl !== null) {
       imgUrl = imgUrl.url;
     }
-    // console.log(events);
 
     return (
       <Link to={`/details/${id}`} className="event-profile">
