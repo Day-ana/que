@@ -21,8 +21,10 @@ class Details extends Component {
       .then(res => res.json())
       .then(
         result => {
+          console.log(result);
           this.setState({
-            name: result.name,
+            info: result,
+            logo: result.logo,
             description: result.description,
             start: result.start,
             isLoaded: true
@@ -55,12 +57,14 @@ class Details extends Component {
             <div className="container-grid">
               <div className="container-grid">
                 <h2>{this.state.name.text}</h2>
-                <br />
-                <p>{this.state.description.text}</p>
-                <br />
+                <img src={this.state.logo.original.url} />
                 <p>{this.state.start.local}</p>
-                {console.log(this.state.description)}
-                {console.log(this.state.start)}
+                <p>{this.state.description.text}</p>
+                {console.log(this.state)}
+
+                <br />
+                {/* {console.log(this.state.description)} */}
+                {console.log(this.state.info)}
               </div>
             </div>
           </div>

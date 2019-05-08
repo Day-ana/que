@@ -12,7 +12,7 @@ class Events extends React.Component {
       event: "",
       loading: true,
       events: [],
-      location: "San Francisco"
+      location: "New York"
     };
   }
   async componentDidMount() {
@@ -29,8 +29,17 @@ class Events extends React.Component {
     const data = await response.json();
     this.setState({ events: data.events });
   }
+
+  onLocationChange = location => {
+    // this.setState({ this.state.location });
+    this.setState({ location: location });
+    // console.log(this.state);
+    setTimeout(console.log(this.state), 5000);
+    setTimeout(this.componentDidMount(), 0);
+  };
   render() {
-    console.log(this.state.location);
+    const location = this.state.location;
+    console.log(location);
 
     return (
       <div className="container">
@@ -48,12 +57,17 @@ class Events extends React.Component {
           <p>About</p> */}
         </div>
         <div className="item-search  ">
-          <SearchQuery props={this.props} />
+          <SearchQuery
+            props={this.props}
+            onLocationChange={this.onLocationChange}
+          />
         </div>
         <div className="item-main border-1">
           <div className="container-grid">
+            {console.log(this.state.events)}
             {this.state.events.map(event => (
               <div key={event.id} id={event.id}>
+                {/* {console.log(event)}   */}
                 <EventsDescription
                   key={event.id}
                   events={event}
