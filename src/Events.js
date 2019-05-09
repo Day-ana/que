@@ -12,39 +12,31 @@ class Events extends React.Component {
       event: "",
       loading: true,
       events: [],
-      location: "New York"
+      location: "San Francisco"
     };
   }
-  async componentDidMount() {
+  async componentDidMount(location) {
     let url;
-    if (this.state.location) {
-      url = `https://www.eventbriteapi.com/v3/events/search/?q=queer&location.address=${
-        this.state.location
-      }=&token=P7LP3DVH7WLX2UKRBVSE`;
+    const local = location || this.state.location;
+    if (local) {
+      url = `https://www.eventbriteapi.com/v3/events/search/?q=queer&location.address=${local}=&token=P7LP3DVH7WLX2UKRBVSE`;
     } else {
       url = `https://www.eventbriteapi.com/v3/events/search/?q=queer&token=P7LP3DVH7WLX2UKRBVSE`;
     }
-
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ events: data.events });
   }
 
   onLocationChange = location => {
-    // this.setState({ this.state.location });
     this.setState({ location: location });
-    // console.log(this.state);
-    setTimeout(console.log(this.state), 5000);
-    setTimeout(this.componentDidMount(), 0);
+    this.componentDidMount(location);
   };
   render() {
-    const location = this.state.location;
-    console.log(location);
-
     return (
       <div className="container">
         <div className="item-header border-1">
-          <Link to="/">Queery... </Link>
+          <Link to="/">Queery [...] </Link>
           <span>{this.state.location} </span>
         </div>
 
@@ -52,9 +44,9 @@ class Events extends React.Component {
           <p>Home</p>
           <p>Events</p>
           <p>Travel</p>
-          {/* <p>Locations</p>
+          <p>Locations</p>
           <p>Sponsor</p>
-          <p>About</p> */}
+          <p>About</p>
         </div>
         <div className="item-search  ">
           <SearchQuery
@@ -64,10 +56,9 @@ class Events extends React.Component {
         </div>
         <div className="item-main border-1">
           <div className="container-grid">
-            {console.log(this.state.events)}
             {this.state.events.map(event => (
               <div key={event.id} id={event.id}>
-                {/* {console.log(event)}   */}
+                {console.log(event)}
                 <EventsDescription
                   key={event.id}
                   events={event}

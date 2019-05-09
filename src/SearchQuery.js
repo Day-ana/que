@@ -1,35 +1,23 @@
 import React from "react";
 
 class SeachQuery extends React.Component {
-  constructor(props) {
-    super(props);
-    //   this.state = {
-    //     location: ""
-    //   };
-    // this.handleFormChange = this.handleFormChange(this);
-  }
-
   handleFormChange = event => {
     event.preventDefault();
-    // console.log(event.target.value);
     console.log("handleFormChange called ...");
-    // this.setState = {
-    //   location: event.target.value
-    // };
-
-    this.props.onLocationChange(event.target.value);
+    this.location = event.target.value;
   };
 
   handleFormClick = event => {
-    event.preventDefault();
     console.log("handleFormClick called ...");
-    // this.props.onLocationChange("miami");
+    event.preventDefault();
+    console.log(this.location);
+    this.props.onLocationChange(this.location);
   };
 
   render() {
     return (
       <div className="search">
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={this.handleFormClick}>
           {/* {console.log(this.state)} */}
           <input
             type="=text"
@@ -43,6 +31,7 @@ class SeachQuery extends React.Component {
             className="border-1"
             value="Search"
             onClick={this.handleFormClick}
+            onSubmit={this.handleFormClick}
           />
         </form>
       </div>
